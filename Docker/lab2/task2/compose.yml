@@ -1,0 +1,32 @@
+services:
+  mongodb:
+    hostname: mongodb
+    image: mongodb/mongodb-atlas-local:8.0.7
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=admin
+      - MONGODB_INITDB_ROOT_PASSWORD=admin
+    expose:
+      - "27017"
+    volumes:
+      - data:/data/db
+      - config:/data/configdb
+    networks:
+      - app-net
+  nginx:
+    image: nginx:alpine-perl
+    container_name: nginx
+    depends_on:
+      - mongodb
+    networks:
+      - app-net
+      - nginx-net
+    ports:
+      - "80:80"
+networks:
+  app-net:
+    driver: bridge
+    internal: true
+  nginx-net:
+volumes:
+  data:
+  config:
