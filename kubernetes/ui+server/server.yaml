@@ -1,0 +1,46 @@
+# -------------------------------
+# Client (nginx)
+# -------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-setup
+  namespace: senior-namespace
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: server-setup-pod
+      name: res-quota
+  template:
+    metadata:
+      labels:
+        app: server-setup-pod
+        name: res-quota
+    spec:
+      containers:
+        - name: server
+          image: nginx:alpine-perl # <-- nginx acting as the server
+          ports:
+            - containerPort: 80
+          resources:
+              requests:
+                memory: "64Mi"
+                cpu: "250m"
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-svc
+  namespace: senior-namespace
+spec:
+  type: ClusterIP
+  selector:
+    app: server-setup-pod
+  ports:
+    - port: 80
+      targetPort: 80

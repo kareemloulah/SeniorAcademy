@@ -1,0 +1,10 @@
+# -------------------------------
+# App NameSpace 
+# ------------------------------- 
+
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: senior-namespace
+  labels: 
+    app: senior-namespace

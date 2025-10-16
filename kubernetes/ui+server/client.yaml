@@ -1,0 +1,49 @@
+# -------------------------------
+# Client (nginx)
+# -------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-setup
+  namespace: senior-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: client-setup-pod
+      name: res-quota
+  template:
+    metadata:
+      labels:
+        app: client-setup-pod
+        name: res-quota
+    spec:
+      containers:
+        - name: client
+          image: nginx:alpine-perl # <-- nginx acting as the client ui
+          ports:
+            - containerPort: 80
+              name: client-port
+
+          resources:
+              requests:
+                memory: "64Mi"
+                cpu: "250m"
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-svc
+  namespace: senior-namespace
+spec:
+  type: NodePort
+  selector:
+    app: client-setup-pod
+  ports:
+    - protocol: TCP
+      port: 80
+      nodePort: 32001
