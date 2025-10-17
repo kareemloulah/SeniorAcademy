@@ -1,4 +1,17 @@
 # Requirments to set up a kubernetes Cluster ex. 1 master 2 Worker Nodes 
+# update os repos on all nodes 
+## Basically what is needed is the following 
+### Required on all nodes 
+- Installing Container runtime engine ” CRI-O or containerd ”
+- Installing CNI ” container network Interface “
+- Installing Kubernetes tools (kubeadm, kubelet, kubectl)
+- Open 6443 port for communecation in firewall 
+### Required on master Node
+- Inintializing kubernetes controle plane node 
+- After init is succesfull installing CNI ” container network Interface “
+### Required on worker Nodes
+- Joining the master node with the given command by the master.
+
 ## required in all nodes 
 - setting up the vms for quality of life tools
 ```
