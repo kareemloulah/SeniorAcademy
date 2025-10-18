@@ -15,7 +15,7 @@
 ## required in all nodes 
 - setting up the vms for quality of life tools
 ```
-sudo apt update \
+sudo apt update 
 sudo apt install -y net-tools \
 git \
 apt-transport-https \
