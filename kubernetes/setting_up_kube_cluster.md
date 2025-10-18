@@ -82,6 +82,22 @@ sudo apt-get install -y kubelet=$KUBE_VERSION kubeadm=$KUBE_VERSION kubectl=$KUB
 # lock the pkgs version 
 sudo apt-mark hold kubelet kubeadm kubectl
 ```
+```
+# enable IP packet forwarding on the node, which allows the Linux kernel 
+# to route network traffic between interfaces. 
+# This is essential in Kubernetes for pod-to-pod communication 
+# across nodes and for routing traffic through the control plane
+# or CNI-managed networks
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# uncomment the line in /etc/sysctl.conf enabling IP forwarding after reboot
+sudo sed -i '/^#net\.ipv4\.ip_forward=1/s/^#//' /etc/sysctl.conf
+
+# Apply the changes to sysctl.conf
+# Any changes made to sysctl configuration files take immediate effect without requiring a reboot
+sudo sysctl -p
+```
+
 ## REQUIRED ONLY ON MASTER 
 ```
 sudo kubeadm init --pod-network-cidr=<cidr> --cri-socket=unix:///run/containerd/containerd.sock
