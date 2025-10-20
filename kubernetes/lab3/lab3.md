@@ -74,9 +74,9 @@ in the deployment we have to attach:
     - image
       envFrom:
         - configMapRef:
-            name: configmap
+            name: mysql-config 
         - secretRef:
-            name: my-secret-sql
+            name: mysql-secret
     ```
  - volumes and volumeMounts for the pvc
     ```
