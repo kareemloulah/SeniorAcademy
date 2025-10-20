@@ -11,12 +11,10 @@ spec:
   selector:
     matchLabels:
       app: server-setup-pod
-      name: res-quota
   template:
     metadata:
       labels:
         app: server-setup-pod
-        name: res-quota
     spec:
       containers:
         - name: server
