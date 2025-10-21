@@ -1,0 +1,12 @@
+name: install multiple tools
+hosts: all
+tasks:
+- name: install several users
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+     - git
+     - curl
+     - nginx
+     

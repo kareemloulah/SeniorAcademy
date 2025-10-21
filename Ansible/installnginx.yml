@@ -1,0 +1,15 @@
+name: Configure Web Server
+hosts: all
+vars:
+  web_package: nginx
+tasks:
+  - name: Ensure nginx is installed
+    package:
+      name: {{ web_package }}
+      state: present
+      notify:
+        - echo
+handlers:
+  - name: echo
+    shell:
+      cmd: echo packeges installed installed
