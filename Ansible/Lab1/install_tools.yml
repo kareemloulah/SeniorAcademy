@@ -1,0 +1,13 @@
+- name: install multiple tools
+  hosts: ec2-web
+  become: yes
+  tasks:
+    - name: install several users
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - git
+        - curl
+        - nginx
+        

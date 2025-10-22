@@ -1,0 +1,10 @@
+- name: Configure Web Server
+  hosts: ec2-web
+  become: yes
+  vars:
+    web_package: nginx
+  tasks:
+    - name: Ensure nginx is installed
+      ansible.builtin.package:
+        name: "{{ web_package }}"
+        state: present

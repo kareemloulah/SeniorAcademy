@@ -1,9 +1,0 @@
-name: Configure Web Server
-hosts: all
-vars:
-  web_package: nginx
-tasks:
-  - name: Ensure nginx is installed
-    package:
-      name: {{ web_package }}
-      state: present
