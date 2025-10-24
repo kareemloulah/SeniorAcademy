@@ -2,23 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx
+    app: deployment-nginx
+  name: deployment-nginx
   namespace: web-app
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
-      app: nginx
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      app: deployment-nginx
+  strategy: {}
   template:
     metadata:
       labels:
-        app: nginx
+        app: deployment-nginx
     spec:
       containers:
       - image: nginx:1.27
@@ -26,10 +22,11 @@ spec:
         ports:
         - containerPort: 80
         resources:
-          limits:
-            memory: 0.5Gi
-            cpu: 500m
           requests:
             memory: 0.5Gi
             cpu: 200m
+          limits:
+            memory: 1Gi
+            cpu: 500m
+          
 status: {}

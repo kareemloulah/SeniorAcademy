@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: mem-cpu-demo
+  name: resource-quota
   namespace: web-app
 spec:
   hard:
+    pods: "8"
     requests.cpu: "2"
-    requests.memory: 1Gi
+    requests.memory: "2Gi"
     limits.cpu: "4"
-    limits.memory: 4Gi
-    pods: "10"
+    limits.memory: "4Gi"

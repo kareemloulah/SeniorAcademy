@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deployment-sql
+  name: deployment-sql
+  namespace: mysql-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deployment-sql
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: deployment-sql
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        ports:
+        - containerPort: 3306
+        resources: {}
+status: {}
